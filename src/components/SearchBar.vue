@@ -4,7 +4,7 @@ const emit = defineEmits(['keyTyped'])
 
 function onchange() {
     console.log(searchValue);
-    if(searchValue.length > 3) emit("keyTyped", searchValue);
+    if(searchValue.length > 1) emit("keyTyped", searchValue);
 }
 </script>
 

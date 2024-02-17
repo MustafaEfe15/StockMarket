@@ -3,8 +3,14 @@
         firmName: String,
         firmValue: String
     })
-</script>
 
+    function drag(event) {
+          var target = event.target;
+          console.log(parseFloat(target.getAttribute('data-x') || 0));
+          console.log(parseFloat(target.getAttribute('data-y') || 0));
+        }
+</script>
+ 
 <template>
 
     <v-card 

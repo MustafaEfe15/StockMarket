@@ -2,8 +2,16 @@
 import StockCard from "./components/StockCard.vue"
 import SearchBar from "./components/SearchBar.vue"
 import StockBasket from "./components/StockBasket.vue";
+import HeaderBar from "./components/headercomponents/HeaderBar.vue";
 
 export default {
+    components: { 
+      StockBasket,
+      StockCard,
+      HeaderBar,
+      SearchBar
+    },
+    
     data() {
         return {
             stockList: [
@@ -41,33 +49,43 @@ export default {
           //ev.target.appendChild(document.getElementById(data));
           this.filteredList = this.filteredList.filter(stock => stock.name != data);
         }
-    }, 
-    components: { StockBasket, StockCard }
+    }
 }
 </script>
 
 <template>
 
-<v-container class="ma-0 pa-0">
+<v-container class="ma-0 pa-0 mx-auto" style="background:white">
+  <v-row>
+    <v-col cols="12">
+      <v-container>
+        <HeaderBar></HeaderBar>
+      </v-container>
+    </v-col>
+  </v-row>
+  
   <v-row>
     <v-col cols="6">
       <v-container class="d-flex flex-row flex-wrap">
-        <SearchBar @keyTyped="filterCards"/>
 
-          <StockCard 
-          v-for="stock in filteredList" 
-          :key="stock.name"
-          :id="stock.name"
-          :firmName="stock.name"
-          :firmValue="stock.value"
-          draggable="true" 
-          v-on:dragstart="drag($event)"
-          />
+      <SearchBar
+      @keyTyped="filterCards"
+      />
+
+      <StockCard
+      v-for="stock in filteredList"
+      :key="stock.name"
+      :id="stock.name"
+      :firmName="stock.name"
+      :firmValue="stock.value"
+      draggable="true"
+      v-on:dragstart="drag($event)"
+      />
         
       </v-container>
     </v-col>
-    <v-col>
-      <v-container class="d-flex flex-row flex-wrap">
+    <v-col cols="6">
+      <v-container>
         <StockBasket v-on:drop="drop($event)" v-on:dragover="allowDrop($event)"></StockBasket>
       </v-container>
     </v-col>
